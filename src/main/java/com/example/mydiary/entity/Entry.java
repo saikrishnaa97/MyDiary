@@ -13,12 +13,25 @@ public class Entry {
 
     @Id
     @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name="uuid",strategy ="uuid2")
     private String id;
     private String profileId;
     private String title;
     private String message;
     private Date dateOfEntry;
     private boolean markedForDelete;
+
+    @Override
+    public String toString() {
+        return "Entry{" +
+                "id='" + id + '\'' +
+                ", profileId='" + profileId + '\'' +
+                ", title='" + title + '\'' +
+                ", message='" + message + '\'' +
+                ", dateOfEntry=" + dateOfEntry +
+                ", markedForDelete=" + markedForDelete +
+                '}';
+    }
 
     public String getId() {
         return id;

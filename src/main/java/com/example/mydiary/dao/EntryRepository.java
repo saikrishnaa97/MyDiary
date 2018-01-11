@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface EntryRepository extends CrudRepository<Entry,String>{
-    List<Entry> findTop10ByMarkedForDeleteFalseAndIdOrderByDateOfEntryDesc(String id);
+    List<Entry> findTop10ByMarkedForDeleteFalseAndProfileIdOrderByDateOfEntryDesc(String id);
     List<Entry> findByMarkedForDeleteFalseAndProfileIdAndDateOfEntry(String profileId, Date date);
-    List<Entry> findByMarkedForDeleteFalseAndId(String id);
+    List<Entry> findByMarkedForDeleteFalseAndProfileId(String id);
 }

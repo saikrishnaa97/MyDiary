@@ -72,7 +72,7 @@ public class MyDiaryServiceImpl implements MyDiaryServiceInterface {
         GeneralResponse general = new GeneralResponse();
         AllEntriesResponse allEntriesResponse = new AllEntriesResponse();
         if (user != null) {
-            List<Entry> entryList = entryRepository.findTop10ByMarkedForDeleteFalseAndIdOrderByDateOfEntryDesc(user.getId());
+            List<Entry> entryList = entryRepository.findTop10ByMarkedForDeleteFalseAndProfileIdOrderByDateOfEntryDesc(user.getId());
             if (entryList != null) {
                 List<com.example.mydiary.dto.Entry> resultEntryList = new ArrayList<>();
                 for (Entry entry : entryList) {
@@ -89,6 +89,8 @@ public class MyDiaryServiceImpl implements MyDiaryServiceInterface {
             response.setNotifyMins(user.getNotifyMins());
             allEntriesResponse.setEmailId(emailId);
             allEntriesResponse.setName(user.getName());
+            allEntriesResponse.setConsecDays(user.getConsec_days());
+            allEntriesResponse.setLastDate(user.getLastEntry());
             general.setStatusCode(1);
         } else {
             general.setStatusCode(0);
@@ -105,7 +107,7 @@ public class MyDiaryServiceImpl implements MyDiaryServiceInterface {
         UserProfile user = profileRepository.findByEmailId(emailId);
         GeneralResponse general = new GeneralResponse();
         if (user != null) {
-            List<Entry> entryList = entryRepository.findByMarkedForDeleteFalseAndId(user.getId());
+            List<Entry> entryList = entryRepository.findByMarkedForDeleteFalseAndProfileId(user.getId());
             if (entryList != null) {
                 List<com.example.mydiary.dto.Entry> resultEntryList = new ArrayList<>();
                 for (Entry entry : entryList) {
@@ -120,6 +122,8 @@ public class MyDiaryServiceImpl implements MyDiaryServiceInterface {
             }
             allEntriesResponse.setName(user.getName());
             allEntriesResponse.setEmailId(emailId);
+            allEntriesResponse.setLastDate(user.getLastEntry());
+            allEntriesResponse.setConsecDays(user.getConsec_days());
             general.setStatusCode(1);
             allEntriesResponse.setGeneral(general);
         } else {
@@ -142,6 +146,14 @@ public class MyDiaryServiceImpl implements MyDiaryServiceInterface {
             newEntry.setTitle(newEntryRequest.getTitle());
             if(entryRepository.save(newEntry) != null) {
                 general.setStatusCode(1);
+                if(user.getLastEntry().compareTo(new Date()) == -1){
+                    user.setConsec_days(user.getConsec_days()+1);
+                }
+                else {
+                    user.setConsec_days(0);
+                }
+                user.setLastEntry(newEntry.getDateOfEntry());
+                profileRepository.save(user);
             }
             else {
                 general.setErrorMessage("Could not add the entry");
