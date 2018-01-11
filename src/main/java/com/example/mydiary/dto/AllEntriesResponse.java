@@ -1,5 +1,6 @@
 package com.example.mydiary.dto;
 
+import java.util.Date;
 import java.util.List;
 
 public class AllEntriesResponse {
@@ -7,6 +8,24 @@ public class AllEntriesResponse {
     private List<Entry> entryList;
     private String emailId;
     private String name;
+    private Date lastDate;
+    private int consecDays;
+
+    public int getConsecDays() {
+        return consecDays;
+    }
+
+    public void setConsecDays(int consecDays) {
+        this.consecDays = consecDays;
+    }
+
+    public Date getLastDate() {
+        return lastDate;
+    }
+
+    public void setLastDate(Date lastDate) {
+        this.lastDate = lastDate;
+    }
 
     public GeneralResponse getGeneral() {
         return general;

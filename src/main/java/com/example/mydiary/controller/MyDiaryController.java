@@ -27,12 +27,12 @@ public class MyDiaryController {
         return myDiaryServiceInterface.checkLogin(checkLoginRequest);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/home")
+    @RequestMapping(method = RequestMethod.GET, value = "/home")
     public HomeResponse getHomeDetails(@RequestParam("emailId") String emailId){
         return myDiaryServiceInterface.getHome(emailId);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/allentries")
+    @RequestMapping(method = RequestMethod.GET, value = "/allentries")
     public AllEntriesResponse getAllEntries(@RequestParam("emailId") String emailId){
         return myDiaryServiceInterface.getAllEntries(emailId);
     }

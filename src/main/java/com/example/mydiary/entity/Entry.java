@@ -21,6 +21,18 @@ public class Entry {
     private Date dateOfEntry;
     private boolean markedForDelete;
 
+    @Override
+    public String toString() {
+        return "Entry{" +
+                "id='" + id + '\'' +
+                ", profileId='" + profileId + '\'' +
+                ", title='" + title + '\'' +
+                ", message='" + message + '\'' +
+                ", dateOfEntry=" + dateOfEntry +
+                ", markedForDelete=" + markedForDelete +
+                '}';
+    }
+
     public String getId() {
         return id;
     }

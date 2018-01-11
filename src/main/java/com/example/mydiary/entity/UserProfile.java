@@ -24,11 +24,12 @@ public class UserProfile {
     private int notifyHrs;
     private int notifyMins;
     private int consec_days;
+    private Date lastEntry;
 
     @Override
     public String toString() {
         return "UserProfile{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
                 ", emailId='" + emailId + '\'' +
@@ -38,7 +39,16 @@ public class UserProfile {
                 ", notifyHrs=" + notifyHrs +
                 ", notifyMins=" + notifyMins +
                 ", consec_days=" + consec_days +
+                ", lastEntry=" + lastEntry +
                 '}';
+    }
+
+    public Date getLastEntry() {
+        return lastEntry;
+    }
+
+    public void setLastEntry(Date lastEntry) {
+        this.lastEntry = lastEntry;
     }
 
     public int getConsec_days() {
