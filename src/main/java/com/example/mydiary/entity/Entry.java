@@ -13,6 +13,7 @@ public class Entry {
 
     @Id
     @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name="uuid",strategy ="uuid2")
     private String id;
     private String profileId;
     private String title;
